@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Input</title>
+</head>
+<body>
+    <input placeholder="Name" class="js-input" onkeydown="enterPressed(event);">
+    <button onclick="nameSubmitted();">Submit</button>
+    <p class="name"></p>
+
+    <script>
+
+        function enterPressed(event){
+            if(event.key === "Enter"){
+                nameSubmitted();
+            }
+        }
+        function nameSubmitted(){
+            let inputElement = document.querySelector('.js-input');
+            let name = inputElement.value;
+            document.querySelector('.name').innerHTML = `${name}`;
+        }
+    </script>
+</body>
+</html>

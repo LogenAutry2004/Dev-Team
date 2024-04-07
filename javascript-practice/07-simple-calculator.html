@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .container{
+            justify-items: center;
+        }
+        .row{
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <p>Calculator</p>
+        </div>
+        <div class="row">
+            <button onclick="input(1);">1</button>
+            <button onclick="input(2);">2</button>
+            <button onclick="input(3);">3</button>
+            <button onclick="operatorClick('+');">+</button>
+            <button onclick="operatorClick('-');">-</button>
+        </div>
+        <div class="row">
+            <button onclick="input(4);">4</button>
+            <button onclick="input(5);">5</button>
+            <button onclick="input(6);">6</button>
+            <button onclick="operatorClick('*');">*</button>
+            <button onclick="operatorClick('/');">/</button>
+        </div>
+        <div class="row">
+            <button onclick="input(7);">7</button>
+            <button onclick="input(8);">8</button>
+            <button onclick="input(9);">9</button>
+            <button onclick="input(0);">0</button>
+            <button onclick="arithmetic(userInput, secondInput, operation)">=</button>
+        </div>
+        <div class="row">
+            <button onclick="
+                userInput = ''
+                operation = ''
+                operationClicked = false;
+                secondInput = ''
+                result = 0
+            ">Clear</button>
+        </div>
+        
+    </div>
+    <script>
+        userInput = ''
+        operation = ''
+        operationClicked = false;
+        secondInput = ''
+        result = 0
+
+        function input(input){
+            if(!operationClicked){
+                userInput += input;
+                console.log(userInput)
+            }
+            else{
+                secondInput += input;
+                console.log(secondInput);
+            }
+        }
+
+        function operatorClick(operator){
+            operation = operator
+            operationClicked = true;
+            console.log(operation);
+        }
+        function arithmetic(userInput, secondInput, operation){
+            intInput1 = parseInt(userInput);
+            intInput2 = parseInt(secondInput); 
+            if(operation === '+'){
+                result = intInput1 + intInput2;
+            }
+            else if(operation === '-'){
+                result = intInput1 - intInput2;
+            }
+            else if(operation === '*'){
+                result = intInput1 * intInput2;
+            }
+            else if(operation === '/'){
+                result = intInput1 / intInput2;
+            }
+            alert(`${intInput1} ${operation} ${intInput2} = ${result}`);
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heads or Tails</title>
+    <style>
+        .container{
+            align-items: center;
+        }
+        .row{
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <p>Guess heads or tails</p>
+            <button onclick="playGame('heads')">Heads</button>
+            <button onclick="playGame('tails');">Tails</button>
+        </div>
+        <div class="row">
+            <button onclick="
+                score.wins = 0;
+                score.losses = 0;
+                localStorage.removeItem('score');
+            ">Reset Score</button>
+        </div>
+    </div>
+    <script>
+        score = JSON.parse(localStorage.getItem('score')) || {
+            wins: 0,
+            losses: 0,
+        }
+
+        function computerGuess(){
+            let compGuess = ''
+            // sets guess to random num
+            guess = Math.random();
+
+            // if guess is between 0 and 0.5
+            if(guess <= .5){
+                compGuess = 'heads';
+            }
+
+            // if guess is between 0.51 and 1
+            else{
+                compGuess = 'tails';
+            }
+            return compGuess;
+        }
+        function playGame(userInput){
+            compGuess = computerGuess();
+            // user input = heads
+            if(userInput === 'heads'){
+                if(compGuess === 'heads'){
+                    console.log('win')
+                    score.wins += 1;
+                }
+                else{
+                    console.log('lose')
+                    score.losses += 1;
+                }
+            }
+
+            // user input = tails
+            else{
+                if(compGuess === 'heads'){
+                    console.log('lose')
+                    score.losses += 1;
+                }
+                else{
+                    console.log('win')
+                    score.wins += 1;
+                }
+            }
+            localStorage.setItem('score', JSON.stringify(score))
+
+            alert(`wins: ${score.wins}, losses: ${score.losses}`)
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booleans</title>
+</head>
+<body>
+    <script>
+        console.log(typeof true)
+
+        // true flag
+        console.log(3 < 5);
+        
+        // false flag
+        console.log(3 > 5);
+
+        // converts to same typeof
+        console.log(5 == '5.00')
+
+        // does not convert
+        console.log(5 === '5.00')
+
+        // if else statements
+        if(false){
+            console.log("Hello");
+        }
+
+        else{
+            console.log("Else");
+        }
+
+        let age = 14;
+        let legaldrive = 16;
+        let permitage = 15;
+        if(age >= legaldrive){
+            console.log("You can drive");
+        }
+        else if(age === permitage){
+            console.log("You can get a permit")
+        }
+        else{
+            console.log("You cannot drive");
+        }
+
+        // logical operators
+        // && and
+        // || or
+        // ! not
+
+        if(5){ // 0 is a falsy value
+            console.log('truthy');
+        }
+        // falsy values
+            // false 0 '' NaN undefined null
+    
+        const cartQuantity = 5;
+
+        if(cartQuantity){ // use of truthy condition
+            console.log('cart has products');
+        }
+
+        console.log(!0);
+
+        console.log('text' / 5); // gives us NaN as it is NOT a NUMBER
+
+        let variable1;
+        console.log(variable1); // undefined
+
+        // ternary operators
+
+        const result = true ? 'truthy' : 'falsy';
+        console.log(result);
+
+        false && console.log('hello'); // short circuit evaluation
+
+        // default operator
+        const currency = 'EUR' || 'USD';
+        console.log(currency)
+
+        const currency2 = undefined || 'USD';
+        console.log(currency2)
+    </script>
+</body>
+</html>

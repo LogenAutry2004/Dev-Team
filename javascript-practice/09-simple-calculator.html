@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .container{
+            justify-items: center;
+        }
+        .row{
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="row">
+            <h3>Calculator</h3>
+            <p class="buttons">[_____]</p>
+        </div>
+        <div class="row">
+            <button onclick="input(1);">1</button>
+            <button onclick="input(2);">2</button>
+            <button onclick="input(3);">3</button>
+            <button onclick="operatorClick('+');">+</button>
+            <button onclick="operatorClick('-');">-</button>
+            <button onclick="backspace();"><img src="backspace.png" alt="backspace_icon" style="height: 10px; width: 10px;"></button>
+        </div>
+        <div class="row">
+            <button onclick="input(4);">4</button>
+            <button onclick="input(5);">5</button>
+            <button onclick="input(6);">6</button>
+            <button onclick="operatorClick('*');">*</button>
+            <button onclick="operatorClick('/');">/</button>
+            <button onclick="ans();">ANS</button>
+        </div>
+        <div class="row">
+            <button onclick="input(7);">7</button>
+            <button onclick="input(8);">8</button>
+            <button onclick="input(9);">9</button>
+            <button onclick="input(0);">0</button>
+            <button onclick="input('.')">.</button>
+            <button onclick="arithmetic(userInput, secondInput, operation); printHistory();">=</button>
+        </div>
+        <div class="row">
+            <button onclick="
+                userInput = ''
+                operation = ''
+                operationClicked = false;
+                secondInput = ''
+                result = 0
+                document.querySelector('.buttons').innerHTML = `[_____]`;
+            ">Clear</button>
+            <button onclick="
+                history.results = '';
+                history.lastEqual = null;
+                printHistory();
+                localStorage.removeItem('history');
+            ">CH</button>
+        </div>
+        <div class="row">
+            <p class="historyPrinted"></p>
+        </div>
+        <div class="row" style="padding-top: 50px;">
+            <h3>Settings</h3>
+            <p>Set Rounding Point</p>
+            <input class="js-rounding" placeholder="Default rounding is 2" onkeydown="enterPressed(event)">
+            <button onclick="roundPoint = roundingPoint();">Set</button>
+        </div>
+        
+    </div>
+    <script>
+        // sets the history object to the local storage history json string or a default object
+        let history = JSON.parse(localStorage.getItem('history')) || {
+            results: "",
+            lastEqual: "null",
+        }
+
+        // sets history equal to current history at the start
+        printHistory();
+
+        // sets all the variables
+        let userInput = ''
+        let operation = ''
+        let operationClicked = false;
+        let secondInput = ''
+        let result = 0
+        let equalPressed = false;
+
+        // allows enter to submit rounding point without pressing button
+        function enterPressed(event){
+            if(event.key === "Enter"){
+                roundPoint = roundingPoint();
+            }
+        }
+
+        // sets rounding point for result
+        function roundingPoint(){
+            let inputElement = document.querySelector('.js-rounding');
+            let roundingPoint = inputElement.value || 2;
+            roundingPointInt = Number(roundingPoint);
+            return roundingPointInt;
+
+        }
+
+        let roundPoint = roundingPoint();
+        console.log(roundPoint);
+
+        
+        // prints history
+        function printHistory(){
+            document.querySelector('.historyPrinted').innerHTML = `History: ${history.results}`;
+        }
+
+        // when ans button is pressed
+        function ans(){
+            if(equalPressed == true){
+                userInput = ''
+                operation = ''
+                operationClicked = false;
+                secondInput = ''
+                result = 0
+                document.querySelector('.buttons').innerHTML = `[_____]`
+            }
+            equalPressed = false;
+
+            // checks if there is a valid last equal
+            if(history.lastEqual == null){
+                alert("You have no last answer");
+            }
+            else{
+                if(!operationClicked){
+                    userInput += history.lastEqual;
+                    document.querySelector('.buttons').innerHTML = userInput;
+                }
+                // when operator is clicked every number afterwards is second input
+                else{
+                    secondInput += history.lastEqual;
+                    document.querySelector('.buttons').innerHTML = `${userInput} ${operation} ${secondInput}`
+                }
+            }
+            
+        }
+
+        function backspace(){
+            if(!operationClicked){
+                userInput = userInput.split("");
+                userInput = userInput.slice(0,-1)
+                userInput = userInput.join("");
+                document.querySelector('.buttons').innerHTML = userInput;
+            }
+            // when operator is clicked every number afterwards is second input
+            else{
+                secondInput = secondInput.split("");
+                secondInput = secondInput.slice(0,-1)
+                secondInput = secondInput.join("");
+                document.querySelector('.buttons').innerHTML = `${userInput} ${operation} ${secondInput}`
+            }
+        }
+
+        // takes in input
+        function input(input){
+
+            // allows you to write over previous function
+            if(equalPressed == true){
+                userInput = ''
+                operation = ''
+                operationClicked = false;
+                secondInput = ''
+                result = 0
+                document.querySelector('.buttons').innerHTML = `[_____]`
+            }
+            equalPressed = false;
+            if(!operationClicked){
+                userInput += input;
+                document.querySelector('.buttons').innerHTML = userInput;
+            }
+            // when operator is clicked every number afterwards is second input
+            else{
+                secondInput += input;
+                document.querySelector('.buttons').innerHTML = `${userInput} ${operation} ${secondInput}`
+            }
+        }
+
+        // when an operator is clicked
+        function operatorClick(operator){
+            operation = operator
+            operationClicked = true;
+            document.querySelector('.buttons').innerHTML = `${userInput} ${operation}`
+            console.log(operation);
+        }
+
+        // calculates math once eqaul is pressed
+        function arithmetic(userInput, secondInput, operation){
+
+            equalPressed = true;
+            // sets strings to floats
+            intInput1 = parseFloat(userInput);
+            intInput2 = parseFloat(secondInput); 
+            if(secondInput == ''){
+                result = Number(intInput1).toFixed(roundPoint);
+                history.results += ` ${userInput} = ${result},`;
+            }
+            else if(operation === '+'){
+                result = intInput1 + intInput2;
+                history.results += ` ${userInput} ${operation} ${secondInput} = ${result},`;
+            }
+            else if(operation === '-'){
+                result = intInput1 - intInput2;
+                result = Number(result).toFixed(roundPoint);
+                history.results += ` ${userInput} ${operation} ${secondInput} = ${result},`;
+            }
+            else if(operation === '*'){
+                result = intInput1 * intInput2;
+                result = Number(result).toFixed(roundPoint);
+                history.results += ` ${userInput} ${operation} ${secondInput} = ${result},`;
+            }
+            else if(operation === '/'){
+                result = intInput1 / intInput2;
+                result = Number(result).toFixed(roundPoint);
+                // updates history object
+                history.results += ` ${userInput} ${operation} ${secondInput} = ${result},`;
+
+            }
+            history.lastEqual = result;
+            console.log(history.lastEqual);
+            document.querySelector('.buttons').innerHTML = `${userInput} ${operation} ${secondInput} = ${result}`
+            // prints history and updates local storage
+            printHistory();
+            localStorage.setItem('history', JSON.stringify(history));
+        }
+
+    </script>
+</body>
+</html>
