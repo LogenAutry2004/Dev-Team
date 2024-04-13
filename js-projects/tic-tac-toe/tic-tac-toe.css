@@ -1,0 +1,26 @@
+.row{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    justify-content: center;
+    align-items: center;
+    
+}
+.column, .column1{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(20,189,172);
+    border-top: 5px solid rgb(13,161,146);
+    border-bottom: 2.5px solid rgb(13,161,146);
+    border-left: 5px solid rgb(13,161,146);
+    border-right: 5px solid rgb(13,161,146);
+    justify-content: center;
+    align-items: center;
+}
+.column1{
+    border-bottom: 5px solid rgb(13,161,146);
+}
+.choice{
+    height: 50px;
+    width: 50px;
+    margin: 25px 20px;
+}
