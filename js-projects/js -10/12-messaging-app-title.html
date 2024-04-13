@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+</head>
+<body>
+    <button onclick="add();">Add</button>
+    <button onclick="remove();">Remove</button>
+    <script>
+        let n = 1;
+        let id1;
+        let id2;
+        function add(){
+            n++;
+        }
+        function remove(){
+            if(n==1){
+                alert('You cannot remove any more messages')
+            }
+            else{
+                n--;
+            }
+        }
+        setInterval(function(){
+            id1 = setTimeout(function(){
+                document.title = `(${n}) New Messages`
+            },3000)
+            id2 = setTimeout(function(){
+                document.title = `App`
+            },4000)
+        },3000)
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="addToCart();">Add to cart</button>
+    <p class="js-add"></p>
+    <script>
+        let added = false;
+        function addToCart(){
+            if(!added){
+                added = true;
+                document.querySelector('.js-add').innerHTML = 'Added';
+            }
+            else{
+                added = false;
+                setTimeout(function(){
+                    document.querySelector('.js-add').innerHTML = '';
+                }, 1000)
+            }
+        }
+    </script>
+</body>
+</html>

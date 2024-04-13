@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let myArray = ['apple', 'apple', 'banana', 'apple']
+        let count = {
+
+        }
+        wordCounter(myArray);
+        function wordCounter(a){
+            let yourArray = a;
+            console.log(yourArray);
+            
+            // initalizes the properties of the object so they can be added to
+            for(let i = 0; i < yourArray.length; i++){
+                count[`${yourArray[i]}`] = 0;
+            }
+
+            // counts the amount of words in each
+            for(let i = 0; i < yourArray.length; i++){
+                count[`${yourArray[i]}`] += 1;
+            }
+        }
+        console.log(count);
+        
+    </script>
+</body>
+</html>

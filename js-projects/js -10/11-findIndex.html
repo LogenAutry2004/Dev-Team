@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        myArray = ['red','blue','green','blue','green','red']
+        function uniqueArray(a){
+            uArray = [];
+            found = false;
+            for(let i = 0; i < a.length; i++){
+                for(let j = 0; j < uArray.length; j++){
+                    if(a[i] === uArray[j]){
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found){
+                    uArray.push(a[i])
+                }
+                found = false;
+            }
+            return uArray;
+        }
+        myArray = uniqueArray(myArray);
+        console.log(myArray);
+    </script>
+</body>
+</html>

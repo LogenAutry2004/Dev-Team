@@ -1,0 +1,15 @@
+.notC{
+    border: none;
+    padding: 10px 15px;
+    border-radius: 7.5px;
+    cursor: pointer;
+}
+
+.C{
+    border: none;
+    padding: 10px 15px;
+    border-radius: 7.5px;
+    cursor: pointer;
+    color: white; 
+    background-color: black;
+}

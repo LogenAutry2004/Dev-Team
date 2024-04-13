@@ -1,0 +1,33 @@
+body{
+    font-family: arial; 
+}
+.input{
+    padding: 10px 5px;
+    margin-right: 5px;
+}
+.input-add{
+    padding: 9px 5px;
+    margin-right: 5px;
+}
+.add{
+    border: none;
+    padding: 11.5px 40px;
+    background-color: green;
+    cursor: pointer;
+    color: white;
+}
+.delete{
+    border: none;
+    padding: 10px 32.5px;
+    background-color: darkred;
+    cursor: pointer;
+    color: white;
+}
+.grid{
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 200px 127px 50px;
+    row-gap: 10px;
+    align-items: center;
+
+}
